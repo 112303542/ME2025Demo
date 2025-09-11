@@ -1,1 +1,17 @@
-Hello World
+語法筆記:
+將remote repo clone到本地repo:git clone
+
+將變更記錄到 local repo:git commit -m"feat:new Demo.txt"
+
+將 local repo 的紀錄推送到 remote repo:git push
+
+將 remote 最新的 commit 抓下來 local:git fetch
+
+把 Fetch 下來的更新合併到當前 branch:git merge
+
+Fetch + Merge:git pull
+
+查看當前專案的狀況:git status
+
+看見你的 commit 歷史與編號:git log
+
