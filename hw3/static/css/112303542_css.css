@@ -1,5 +1,35 @@
-.navigationBar{
-    background:rgb(23, 156, 209);
-    color: white;
-
+.navstyle{
+    list-style-type: none;
+    padding: 10px;
+    background-color:rgb(7, 118, 161);
+    overflow: hidden;
 }
+
+.navbar{
+    float:left;
+    border-right: 1px solid rgb(7, 118, 161);
+}
+
+.navbar a{
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+}
+
+#hover_1:hover{
+    background-color: rgb(44, 159, 194);
+    color: lightgray;
+}
+
+.dropdown-menu{
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
