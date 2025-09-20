@@ -27,9 +27,12 @@
 .dropdown-menu{
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: rgb(44, 159, 194);
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    list-style-type: none;
+    padding: 0px;
 }
 
+.navbar:hover .dropdown-menu{display: block;}
