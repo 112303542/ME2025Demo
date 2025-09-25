@@ -2,13 +2,14 @@
 <html>
     <head>
         <title>猜數字</title>
-        <script src="static\112303542_js_1.js"></script>
+        <script src="static/112303542_js_1.js" defer></script>
     </head>
     <body>
-        <h1><b>請輸入一個介於0~100的整數:</b></h1><br>
-        <form action="">
+        <h1><b>猜數字遊戲</b></h1><br>
+        <form>
+            <label for="inputNumber">請輸入一個介於0~100的整數:</label><br>
             <input name="inputNumber" id="guessNumber">
-            <button type="submit" onclick="answer_check()">猜</button>
+            <button type="button" onclick="answer_check()">猜</button>
         </form>
     </body>
 </html>

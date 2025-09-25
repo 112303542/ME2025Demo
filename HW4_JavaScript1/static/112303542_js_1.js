@@ -5,11 +5,13 @@ function random_answer(min,max){
 var answer = random_answer(0,100);
 var guessCount = 0;
 
-function answer_check(valiable){
+function answer_check(){
     guessCount += 1;
-    const valiable = document.getElementById('guessNumber');
+    const valiable = parseInt(document.getElementById('guessNumber').value);
     if(valiable == answer){
         alert('恭喜您猜對了，您一共猜了'+ guessCount +'次。');
+        answer = random_answer(0,100);
+        guessCount = 0;
     }
     else if(valiable < answer){
         alert('太小了，請再試一次');
