@@ -21,6 +21,17 @@ function buttonClick(value){
     if(value === "clear") display.value =  "";
 
     else if(value === '='){
-        
+        try{
+            let input = display.value;
+            let answer = eval(input);
+            alert(input + ' = ' + answer);
+            display.value = input +  ' = ' + answer;
+        }
+
+        catch(e){
+            alert('算式有誤!');
+        }
     }
+
+    else display.value += value;
 }
