@@ -15,3 +15,12 @@ for(let row of buttons){
     document.writeln('<br>');
 }
 
+function buttonClick(value){
+    let display = document.getElementById("display");
+
+    if(value === "clear") display.value =  "";
+
+    else if(value === '='){
+        
+    }
+}
