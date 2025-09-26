@@ -25,7 +25,7 @@ function buttonClick(value){
             let input = display.value;
             let answer = eval(input);
             alert(input + ' = ' + answer);
-            display.value = input +  ' = ' + answer;
+            display.value = answer;
         }
 
         catch(e){
