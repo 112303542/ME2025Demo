@@ -24,8 +24,11 @@ function answer_check(){
 
     if(valiable == answer){
         alert('恭喜您猜對了，您一共猜了'+ guessCount +'次，' + '一共花了' + time.toFixed(2) + '秒。');
-        let history = document.createTextNode('猜了' + guessCount + '次，耗時' +  time.toFixed(2) + '秒' + nowtime.toLocaleString('zh-TW',{timeZone:'Asia/Taipei'}));
-        document.body.appendChild(history);
+
+        const history = document.createElement('li');
+        history.textContent = '猜了' + guessCount + '次，耗時' +  time.toFixed(2) + '秒 ' + nowtime.toLocaleString('zh-TW',{timeZone:'Asia/Taipei'});
+        document.getElementById('history').appendChild(history);
+        
         answer = random_answer(0 , 100);
         guessCount = 0;
         output.innerHTML = '';
