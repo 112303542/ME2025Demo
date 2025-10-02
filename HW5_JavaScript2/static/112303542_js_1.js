@@ -9,7 +9,7 @@ var stopTimer = null;
 
 function timer(){
     time += 0.01;
-    console.log(time.toFixed(2));
+    //console.log(time.toFixed(2));
     document.getElementById('output_2').innerHTML = '遊戲時間' + time.toFixed(2) + '秒';
 }
 
@@ -18,18 +18,18 @@ function answer_check(){
     let output = document.getElementById('output');
     guessCount += 1;
     const valiable = parseInt(document.getElementById('guessNumber').value);
+    let nowtime = new Date();
 
     if(guessCount == 1) stopTimer = setInterval(timer , 10);
 
     if(valiable == answer){
         alert('恭喜您猜對了，您一共猜了'+ guessCount +'次，' + '一共花了' + time.toFixed(2) + '秒。');
+        let history = document.createTextNode('猜了' + guessCount + '次，耗時' +  time.toFixed(2) + '秒' + nowtime.toLocaleString('zh-TW',{timeZone:'Asia/Taipei'}));
+        document.body.appendChild(history);
         answer = random_answer(0 , 100);
         guessCount = 0;
         output.innerHTML = '';
         clearInterval(stopTimer);
-
-        let history = document.createComment;
-        //history.value =  
     }
 
     else if(valiable < answer){
