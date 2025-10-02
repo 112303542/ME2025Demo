@@ -5,6 +5,7 @@ function random_answer(min , max){
 var answer = random_answer(0 , 100);
 var guessCount = 0;
 var time = 0.00;
+var stopTimer = null;
 
 function timer(){
     time += 0.01;
@@ -18,14 +19,15 @@ function answer_check(){
     guessCount += 1;
     const valiable = parseInt(document.getElementById('guessNumber').value);
 
-    setInterval(timer,10);
+    if(guessCount == 1) stopTimer = setInterval(timer , 10);
 
     if(valiable == answer){
         alert('恭喜您猜對了，您一共猜了'+ guessCount +'次，' + '一共花了' + time.toFixed(2) + '秒。');
         answer = random_answer(0 , 100);
         guessCount = 0;
         output.innerHTML = '';
-        clearInterval(timer);
+        clearInterval(stopTimer);
+
         let history = document.createComment;
         //history.value =  
     }
