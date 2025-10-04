@@ -67,54 +67,54 @@ items.forEach(item => {
 });
 
 checkoutBtn.addEventListener("click", () => {
-  const total = parseInt(totalCell.textContent);
-  if(isNaN(total) || total <= 0){
-    alert("請先選擇要購買的商品！");
-    return;
-  }
-
-  let detail = "";
-  document.querySelectorAll("tbody tr").forEach(row => {
-    const checkbox = row.querySelector(".item");
-    if(checkbox.checked){
-      const name = row.children[1].textContent;
-      const qty = parseInt(row.querySelector(".itemnum").value);
-      const stockCell = row.querySelector(".stock");
-      let stock = parseInt(stockCell.textContent);
-      stock -= qty;
-
-      if(stock < 0) stock = 0;
-      stockCell.textContent = stock;
-
-      if(stock === 0){
-        row.querySelector(".itemnum").disabled = true;
-        row.querySelector(".plus").disabled = true;
-        row.querySelector(".minus").disabled = true;
-      }
-
-      else row.querySelector(".itemnum").value = 1;
-
-      checkbox.checked = false;
-      detail += `${name} * ${qty}, `;
+    const total = parseInt(totalCell.textContent);
+    if(isNaN(total) || total <= 0){
+        alert("請先選擇要購買的商品！");
+        return;
     }
-  });
 
-    function showReceiptAlert(total){
-        if(total <= 0){
-            alert("請先選擇要購買的商品！");
-            return;
+    let detail = "";
+    document.querySelectorAll("tbody tr").forEach(row => {
+        const checkbox = row.querySelector(".item");
+        if(checkbox.checked){
+            const name = row.children[1].textContent.trim();
+            const qty = parseInt(row.querySelector(".itemnum").value);
+            detail += `${name} * ${qty},\n`;
         }
-        let message = ["感謝您的購買，您的總購買的產品如下:\n\n"];
-        document.querySelectorAll("tbody tr").forEach(row => {
-            const chk = row.querySelector(".item");
-            if (chk && chk.checked) {
-                const name = row.children[1].textContent.trim();
-                const qty = parseInt(row.querySelector(".itemnum").value);
-                message += `${name} * ${qty},\n`;
-            }
-        });
-        message += `\n總計：$${total}元`;
-        alert(message);
-    }
-    showReceiptAlert(total);
+    });
+
+    showReceiptAlert(total, detail);
+
+    document.querySelectorAll("tbody tr").forEach(row => {
+        const checkbox = row.querySelector(".item");
+        if(checkbox.checked){
+            const stockCell = row.querySelector(".stock");
+            let stock = parseInt(stockCell.textContent);
+            const qty = parseInt(row.querySelector(".itemnum").value);
+            stock -= qty;
+            if(stock < 0) stock = 0;
+            stockCell.textContent = stock;
+
+            if(stock === 0){
+                row.querySelector(".itemnum").disabled = true;
+                row.querySelector(".plus").disabled = true;
+                row.querySelector(".minus").disabled = true;
+            } 
+            else row.querySelector(".itemnum").value = 1;
+
+            checkbox.checked = false;
+        }
+    });
 });
+
+function showReceiptAlert(total, detail){
+    if(total <= 0){
+        alert("請先選擇要購買的商品！");
+        return;
+    }
+
+    let message = "感謝您的購買，您的總購買的產品如下：\n\n";
+    message += detail;
+    message += `\n總計：$${total}元`;
+    alert(message);
+}
