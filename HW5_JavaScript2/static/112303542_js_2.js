@@ -28,3 +28,18 @@ plusBtns.forEach((btn, index) => {
     updateTotal();
   });
 });
+
+document.querySelectorAll(".itemnum").forEach(input => {
+  input.addEventListener("blur", () => {
+    const row = input.closest("tr");
+    const stock = parseInt(row.querySelector(".stock").textContent);
+    let qty = parseInt(input.value);
+
+    if (isNaN(qty) || qty < 1) qty = 1;
+    if (qty > stock) qty = stock;
+
+    input.value = qty;
+    updateRowTotal(row);
+    updateTotal();
+  });
+});
