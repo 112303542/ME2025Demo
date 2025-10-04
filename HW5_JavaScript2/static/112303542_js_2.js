@@ -99,8 +99,22 @@ checkoutBtn.addEventListener("click", () => {
     }
   });
 
-  updateTotal();
-  alert("感謝您的購買");
-  
-  alert(`${detail}總計：$${total}元`);
+    function showReceiptAlert(total){
+        if(total <= 0){
+            alert("請先選擇要購買的商品！");
+            return;
+        }
+        let message = ["感謝您的購買，您的總購買的產品如下:\n\n"];
+        document.querySelectorAll("tbody tr").forEach(row => {
+            const chk = row.querySelector(".item");
+            if (chk && chk.checked) {
+                const name = row.children[1].textContent.trim();
+                const qty = parseInt(row.querySelector(".itemnum").value);
+                message += `${name} * ${qty},\n`;
+            }
+        });
+        message += `\n總計：$${total}元`;
+        alert(message);
+    }
+    showReceiptAlert(total);
 });
