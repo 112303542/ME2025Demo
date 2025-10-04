@@ -22,3 +22,28 @@ button:hover {
   background: #bbb;
 }
 
+.itemnum {
+  width: 40px;
+  text-align: center;
+}
+
+.total_area td:first-child {
+  text-align: center;
+  padding-right: 15px;
+}
+
+.checkout_box {
+  text-align: right;
+}
+
+#checkout {
+  background: #666;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+#checkout:hover {
+  background-color: #444;
+}
+

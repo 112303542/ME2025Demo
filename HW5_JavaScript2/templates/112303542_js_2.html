@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>購物車</title>
-        <script rel="stylesheet" href="../static/112303542_js_2.css"></script>
+        <link rel="stylesheet" href="../static/112303542_js_2.css">
         <script src="../static/112303542_js_2.js"></script>
     </head>
     <body>
@@ -10,7 +10,7 @@
         <table id="cart">
             <thead>
                 <tr>
-                    <th><input type="checkbox" id="checkbox_all"></th>
+                    <th><input type="checkbox" selected disabled id="checkbox_all"></th>
                     <th>商品名稱</th>
                     <th>商品庫存</th>
                     <th>單價</th>
@@ -48,7 +48,7 @@
                 
                 <tr>
                     <td><input type="checkbox" class="item"></td>
-                    <td>大鯊魚</td>
+                    <td>鯊魚填充玩具</td>
                     <td class="stock">105</td>
                     <td class="price">$590</td>
                     <td>
@@ -60,14 +60,15 @@
                 </tr>
             </tbody>
 
-            <!--<tfoot>
-                <td>total</td>
-                <td><span id="total_area">$0</span></td>
-            </tfoot>-->
+            <tfoot class="total_area">
+                <tr>
+                    <td colspan="5">total</td>
+                    <td>$0</td>
+                </tr>
+            </tfoot>
         </table>
-        <div class="total-area">
-            <p>total <span id="total">$0</span></p>
-            <button id="checkout">結帳</button>
+
+        <div class="checkout_box">
+             <button id="checkout">結帳</button>
         </div>
-    </body>
 </html>
