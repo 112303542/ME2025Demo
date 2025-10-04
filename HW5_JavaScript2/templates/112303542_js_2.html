@@ -3,14 +3,13 @@
     <head>
         <title>購物車</title>
         <link rel="stylesheet" href="../static/112303542_js_2.css">
-        <script src="../static/112303542_js_2.js"></script>
     </head>
     <body>
         <h4><b>購物車</b></h4>
         <table id="cart">
             <thead>
                 <tr>
-                    <th><input type="checkbox" selected disabled id="checkbox_all"></th>
+                    <th><input type="checkbox" id="checkbox_all" checked disabled></th>
                     <th>商品名稱</th>
                     <th>商品庫存</th>
                     <th>單價</th>
@@ -24,11 +23,11 @@
                     <td><input type="checkbox" class="item"></td>
                     <td>手機架</td>
                     <td class="stock">200</td>
-                    <td class="price">$79</td>
+                    <td class="price">79</td>
                     <td>
                         <button class="minus">-</button>
                         <input type="text" class="itemnum" value="1">
-                        <button class="minus">+</button>
+                        <button class="plus">+</button>
                     </td>
                     <td class="total">79</td>
                 </tr>
@@ -37,11 +36,11 @@
                     <td><input type="checkbox" class="item"></td>
                     <td>辦公椅</td>
                     <td class="stock">56</td>
-                    <td class="price">$7499</td>
+                    <td class="price">7499</td>
                     <td>
                         <button class="minus">-</button>
                         <input type="text" class="itemnum" value="1">
-                        <button class="minus">+</button>
+                        <button class="plus">+</button>
                     </td>
                     <td class="total">7499</td>
                 </tr>
@@ -50,11 +49,11 @@
                     <td><input type="checkbox" class="item"></td>
                     <td>鯊魚填充玩具</td>
                     <td class="stock">105</td>
-                    <td class="price">$590</td>
+                    <td class="price">590</td>
                     <td>
                         <button class="minus">-</button>
                         <input type="text" class="itemnum" value="1">
-                        <button class="minus">+</button>
+                        <button class="plus">+</button>
                     </td>
                     <td class="total">590</td>
                 </tr>
@@ -63,7 +62,7 @@
             <tfoot class="total_area">
                 <tr>
                     <td colspan="5">total</td>
-                    <td>$0</td>
+                    <td>0</td>
                 </tr>
             </tfoot>
         </table>
@@ -71,4 +70,6 @@
         <div class="checkout_box">
              <button id="checkout">結帳</button>
         </div>
+        <script src="../static/112303542_js_2.js"></script>
+    </body>
 </html>
