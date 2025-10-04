@@ -9,7 +9,7 @@ minusBtns.forEach((btn, index) => {
     const row = btn.closest("tr");
     const qtyInput = row.querySelector(".itemnum");
     let qty = parseInt(qtyInput.value);
-    if (qty > 1) qty--;
+    if(qty > 1) qty--;
     qtyInput.value = qty;
     updateRowTotal(row);
     updateTotal();
@@ -22,7 +22,7 @@ plusBtns.forEach((btn, index) => {
     const qtyInput = row.querySelector(".itemnum");
     const stock = parseInt(row.querySelector(".stock").textContent);
     let qty = parseInt(qtyInput.value);
-    if (qty < stock) qty++;
+    if(qty < stock) qty++;
     qtyInput.value = qty;
     updateRowTotal(row);
     updateTotal();
@@ -35,8 +35,8 @@ document.querySelectorAll(".itemnum").forEach(input => {
     const stock = parseInt(row.querySelector(".stock").textContent);
     let qty = parseInt(input.value);
 
-    if (isNaN(qty) || qty < 1) qty = 1;
-    if (qty > stock) qty = stock;
+    if(isNaN(qty) || qty < 1) qty = 1;
+    if(qty > stock) qty = stock;
 
     input.value = qty;
     updateRowTotal(row);
@@ -55,7 +55,7 @@ function updateTotal() {
   let total = 0;
   document.querySelectorAll("tbody tr").forEach(row => {
     const checkbox = row.querySelector(".item");
-    if (checkbox.checked) {
+    if(checkbox.checked){
       total += parseInt(row.querySelector(".total").textContent);
     }
   });
@@ -66,3 +66,41 @@ items.forEach(item => {
   item.addEventListener("change", updateTotal);
 });
 
+checkoutBtn.addEventListener("click", () => {
+  const total = parseInt(totalCell.textContent);
+  if(isNaN(total) || total <= 0){
+    alert("請先選擇要購買的商品！");
+    return;
+  }
+
+  let detail = "";
+  document.querySelectorAll("tbody tr").forEach(row => {
+    const checkbox = row.querySelector(".item");
+    if(checkbox.checked){
+      const name = row.children[1].textContent;
+      const qty = parseInt(row.querySelector(".itemnum").value);
+      const stockCell = row.querySelector(".stock");
+      let stock = parseInt(stockCell.textContent);
+      stock -= qty;
+
+      if(stock < 0) stock = 0;
+      stockCell.textContent = stock;
+
+      if(stock === 0){
+        row.querySelector(".itemnum").disabled = true;
+        row.querySelector(".plus").disabled = true;
+        row.querySelector(".minus").disabled = true;
+      }
+
+      else row.querySelector(".itemnum").value = 1;
+
+      checkbox.checked = false;
+      detail += `${name} * ${qty}, `;
+    }
+  });
+
+  updateTotal();
+  alert("感謝您的購買");
+  
+  alert(`${detail}總計：$${total}元`);
+});
