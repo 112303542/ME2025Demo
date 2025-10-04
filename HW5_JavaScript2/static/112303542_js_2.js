@@ -5,6 +5,35 @@ const plusBtns = document.querySelectorAll(".plus");
 const totalCell = document.getElementById("total");
 const checkoutBtn = document.getElementById("checkout");
 
+checkboxAll.addEventListener("change", () => {
+    const isChecked = checkboxAll.checked;
+    checkboxAll.indeterminate = false;
+    items.forEach(chk => {
+        if(!chk.disabled) chk.checked = isChecked;
+    });
+    updateTotal();
+});
+
+items.forEach(chk => {
+    chk.addEventListener("change", () => {
+        const enabledItems = Array.from(items).filter(i => !i.disabled);
+        const allChecked = enabledItems.every(i => i.checked);
+        const noneChecked = enabledItems.every(i => !i.checked);
+
+        if(allChecked){
+        checkboxAll.checked = true;
+        checkboxAll.indeterminate = false;
+        }
+        else if(noneChecked){
+        checkboxAll.checked = false;
+        checkboxAll.indeterminate = false;
+        }
+        else checkboxAll.indeterminate = true;
+        
+        updateTotal();
+    });
+});
+
 minusBtns.forEach((btn, index) => {
   btn.addEventListener("click", () => {
     const row = btn.closest("tr");
@@ -63,10 +92,6 @@ function updateTotal() {
   totalCell.textContent = total;
 }
 
-items.forEach(item => {
-  item.addEventListener("change", updateTotal);
-});
-
 checkoutBtn.addEventListener("click", () => {
     const total = parseInt(totalCell.textContent);
     if(isNaN(total) || total <= 0){
@@ -78,7 +103,7 @@ checkoutBtn.addEventListener("click", () => {
     document.querySelectorAll("tbody tr").forEach(row => {
         const checkbox = row.querySelector(".item");
         if(checkbox.checked){
-            const name = row.children[1].textContent.trim();
+            const name = row.querySelector(".name").textContent.trim();
             const qty = parseInt(row.querySelector(".itemnum").value);
             detail += `${name} * ${qty},\n`;
         }
