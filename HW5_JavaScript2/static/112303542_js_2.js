@@ -1,3 +1,4 @@
+const checkboxAll = document.getElementById("checkbox_all");
 const items = document.querySelectorAll(".item");
 const minusBtns = document.querySelectorAll(".minus");
 const plusBtns = document.querySelectorAll(".plus");
