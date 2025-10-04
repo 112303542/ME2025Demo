@@ -47,3 +47,8 @@ button:hover {
   background-color: #444;
 }
 
+.item {
+  transform: scale(2);
+  cursor: pointer;
+  margin: 4px;
+}
