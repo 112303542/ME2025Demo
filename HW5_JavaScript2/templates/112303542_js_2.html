@@ -2,9 +2,11 @@
 <html>
     <head>
         <title>購物車</title>
+        <script rel="stylesheet" href="../static/112303542_js_2.css"></script>
         <script src="../static/112303542_js_2.js"></script>
     </head>
     <body>
+
         <h4><b>購物車</b></h4>
         <table id="cart">
             <thead>
@@ -59,12 +61,14 @@
                 </tr>
             </tbody>
 
-            <tfoot>
+            <!--<tfoot>
                 <td>total</td>
                 <td><span id="total_area">$0</span></td>
-            </tfoot>
+            </tfoot>-->
         </table>
-        
-        <button id="confirm">確定</button>
+        <div class="total-area">
+            <p>total <span id="total">$0</span></p>
+            <button id="checkout">結帳</button>
+        </div>
     </body>
 </html>
