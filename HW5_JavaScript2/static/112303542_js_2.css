@@ -9,3 +9,16 @@ th, td{
   text-align: center;
   padding: 10px;
 }
+
+button {
+  border: none;
+  background: #ddd;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: #bbb;
+}
+
