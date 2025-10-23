@@ -1,7 +1,7 @@
 import sqlite3 
 import json
-import os
-import webbrowser
+#import os
+#import webbrowser
 db_path = "users.db"
 conn = sqlite3.connect(db_path)
 cur = conn.cursor()
