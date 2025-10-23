@@ -8,7 +8,7 @@
 <body>
     <h1>成績輸入系統</h1>
     <h4 id="teachername"></h4>
-    <h4>老師，您好</h4>
+
     <form action="Login.html">
         <button type="submit">登出</button>
         <br><br>
@@ -23,6 +23,15 @@
     </form>
     <br>
     <input type="submit">
+    <br><br>
+
+    <table border="1">
+        <thead>
+            <tr><th>姓名</th><th>學號</th><th>成績</th></tr>
+        </thead>
+        <tbody id="studentTable"></tbody>
+    </table>
+
     <br><br>
     <label for="Delete_student_data" class="Delete_student_data">輸入學號刪除學生資料:</label>
     <input id="Delete_student_data" class="Delete_student_data">
