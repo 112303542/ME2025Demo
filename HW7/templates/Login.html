@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <head>
+    <link rel="icon" href="data:,">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <script src="../static/json.js"></script>
+    <script src="/static/json.js"></script>
 </head>
 <body>
     <h1>教師登入介面</h1>
     <form action="/login" method="post">
         <label for="input_1">教師帳號:</label>
-        <input id="input_1" required>
-        <br><br>
+        <input id="input_1" name="username" required autocomplete="username" />
+
+        <br /><br />
+
         <label for="teacherpw">帳號密碼:</label>
-        <input type="password" id="teacherpw" required>
-        <br><br>
+        <input type="password" id="teacherpw" name="password" required autocomplete="current-password" />
+
+        <br /><br />
         <button type="submit">登入</button>
     </form>
 </body>
