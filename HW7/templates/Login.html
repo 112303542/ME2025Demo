@@ -17,5 +17,11 @@
         <br><br>
         <button type="submit">登入</button>
     </form>
+
+    <script>
+        const err = new URLSearchParams(location.search).get('err');
+        if(err === 'pwd')  alert('密碼錯誤，請重新輸入');
+        if(err === 'user') alert('查無此帳號');
+    </script>
 </body>
 </html>
