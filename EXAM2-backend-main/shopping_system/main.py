@@ -36,7 +36,21 @@ def page_register():
         if not re.compile(r"^[A-Za-z0-9._%+-]+@gmail\.com$").fullmatch(email):
             return jsonify({"status": "error", "message":"Email 格式不符重新輸入"})
         
-        
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT id FROM users WHERE username=?", (username,))
+        row = cur.fetchone()
+        if row:
+            cur.execute("UPDATE users SET password=?, email=? WHERE id=?",
+                        (password, email, row['id']))
+            conn.commit()
+            conn.close()
+            return jsonify({"status": "success", "message": "帳號已存在，成功修改密碼或信箱"})
+        cur.execute("INSERT INTO users (username, password, email) VALUES (?,?,?)",
+                    (username, password, email))
+        conn.commit()
+        conn.close()
+        return jsonify({"status": "success", "message": "註冊成功"})
     return render_template('page_register.html')
 
 
@@ -75,7 +89,20 @@ def page_login():
         return jsonify({"status": "error", "message": str(e)}), 500
 
 # 補齊剩餘副程式
+@app.route('/index')
+def index_page():
+    if 'username' not in session:
+        return redirect(url_for('page_login'))
+    return render_template('index.html')
 
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('page_login'))
+
+@app.route('/place_order', methods=['POST'])
+def place_order():
+    data = request.get_json()
 
 # 補齊空缺程式碼
 if __name__ == '__main__':
