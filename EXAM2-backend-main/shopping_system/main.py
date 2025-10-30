@@ -10,9 +10,9 @@ app = Flask(__name__)
 
 # 路徑修改
 def get_db_connection():
-    conn = sqlite3.connect('')
-    if not os.path.exists(''):
-        logging.error(f"Database file not found at {''}")
+    conn = sqlite3.connect('shopping_data.db')
+    if not os.path.exists('shopping_data.db'):
+        logging.error(f"Database file not found at {'shopping_data.db'}")
         return None
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
