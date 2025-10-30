@@ -81,6 +81,31 @@ function normalizeImg(url = '') {
   return url.replace(/\/{2,}/g, '/').replace('../static', './static');
 }
 
+function syncRowUI(tr, st) {
+  const chk = tr.querySelector(".row-check");
+  const input = tr.querySelector(".qty-input");
+  const dec = tr.querySelector(".btn-dec");
+  const inc = tr.querySelector(".btn-inc");
+
+  // 未勾選：數量=0、input/± 都禁用
+  if (!st.checked) {
+    st.qty = 0;
+    input.value = 0;
+    input.disabled = true;
+    dec.disabled = true;
+    inc.disabled = true;
+  } else {
+    // 勾選：若目前 qty=0，改為 1；「-」禁用、input/「+」啟用
+    if (!st.qty) st.qty = 1;
+    input.value = st.qty;
+    input.disabled = false;
+    inc.disabled = false;
+    // 題目要求：勾選後數量從 0→1，且「-」不可按（直到 qty>1）
+    dec.disabled = st.qty <= 1;
+  }
+  updateRowTotal(tr);
+}
+
 // === 渲染產品表格（含 checkbox、± 數量、單列總金額） ===
 function display_products(products_to_display) {
   const tbody = document.querySelector('#products table tbody');
@@ -116,6 +141,10 @@ function display_products(products_to_display) {
     `;
     tbody.insertAdjacentHTML('beforeend', product_info);
   }
+  tbody.querySelectorAll("tr").forEach((tr) => {
+    const key = tr.getAttribute("data-key");
+    syncRowUI(tr, rowState.get(key));
+  });
 
   refreshSummary();
 }
@@ -188,12 +217,14 @@ function apply_filter(products_to_filter) {
     if (e.target.classList.contains('row-check')) {
       st.checked = e.target.checked;
       rowState.set(key, st);
+      syncRowUI(tr, st);
       refreshSummary();
       return;
     }
 
     // 減少數量
     if (e.target.classList.contains('btn-dec')) {
+      if (!st.checked) return;
       const input = tr.querySelector('.qty-input');
       const v = Math.max(0, Number(input.value || 0) - 1);
       input.value = v;
@@ -204,13 +235,14 @@ function apply_filter(products_to_filter) {
         chk.checked = true; st.checked = true;
       }
       rowState.set(key, st);
-      updateRowTotal(tr);
+      syncRowUI(tr, st);
       refreshSummary();
       return;
     }
 
     // 增加數量
     if (e.target.classList.contains('btn-inc')) {
+      if (!st.checked) return;
       const input = tr.querySelector('.qty-input');
       const v = Math.max(0, Number(input.value || 0) + 1);
       input.value = v;
@@ -220,7 +252,7 @@ function apply_filter(products_to_filter) {
         chk.checked = true; st.checked = true;
       }
       rowState.set(key, st);
-      updateRowTotal(tr);
+      syncRowUI(tr, st);
       refreshSummary();
       return;
     }
@@ -231,11 +263,17 @@ function apply_filter(products_to_filter) {
     const tr = e.target.closest('tr');
     const key = tr.getAttribute('data-key');
     const st = rowState.get(key) || { checked: false, qty: 0 };
+    
+    if (!st.checked) {
+      // 安全回退
+      e.target.value = 0;
+      return;
+    }
 
     const v = Math.max(0, Number(e.target.value || 0));
     e.target.value = v;
     st.qty = v;
-
+    
     const chk = tr.querySelector('.row-check');
     if (!chk.checked && v > 0) {
       chk.checked = true; st.checked = true;
