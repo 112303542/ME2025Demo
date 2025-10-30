@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template, session, redirect, u
 from datetime import datetime
 import sqlite3
 import logging
-import re 
+import re
 import os
 
 
@@ -103,6 +103,33 @@ def logout():
 @app.route('/place_order', methods=['POST'])
 def place_order():
     data = request.get_json()
+    items = data.get('items')
+    now_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+    conn = get_db_connection()
+    cur = conn.cursor()
+    for it in items:
+        name = it.get('name')
+        price = int(it.get('price', 0))
+        qty = int(it.get('qty', 0))
+        if not name or qty <= 0: 
+            continue
+        cur.execute("""INSERT INTO orders (Product, Price, Number, Total Price, Time)
+                       VALUES (?, ?, ?, ?, ?, ?)""",
+                    (name, price, qty, price*qty, now_str))
+    conn.commit()
+
+    lines = [f"{now_str}，已成功下單：", ""]
+    total_sum = 0
+    for it in items:
+        n = int(it.get('qty',0)); p = int(it.get('price',0)); name = it.get('name')
+        if n>0 and name:
+            total = n*p; total_sum += total
+            lines.append(f"{name}: {p} NT/件 ×{n} 共 {total} NT")
+    lines.append("")
+    lines.append(f"此單花費總金額：{total_sum} NT")
+    conn.close()
+
+    return jsonify({"status":"success", "message":"\n".join(lines)})
 
 # 補齊空缺程式碼
 if __name__ == '__main__':
