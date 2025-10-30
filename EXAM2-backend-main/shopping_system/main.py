@@ -6,7 +6,8 @@ import re
 import os
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates', static_folder='static')
+app.secret_key = "exam2-secret"
 
 
 # 路徑修改
@@ -85,7 +86,7 @@ def page_login():
             if result["status"] == "success":
                 session['username'] = username
             return jsonify(result)
-        return render_template('page_login.html')
+        return render_template('page_login_.html')
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
