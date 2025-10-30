@@ -15,8 +15,9 @@ const products = [
 
 (function showUsername() {
 // === 顯示登入使用者於導行列，補齊程式碼 ===
-  const user_name = document.getElementById("username");
-  if(user_name) 
+  const username = localStorage.getItem("username");
+  const userDisplay = document.getElementById("username-display");
+  
 })();
 
 
