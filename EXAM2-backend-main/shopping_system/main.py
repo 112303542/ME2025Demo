@@ -16,23 +16,27 @@ def get_db_connection():
         return None
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
-
-# 補齊空缺程式碼
-@app.route('/page_login')
-def page_login():
-        return render_template('page_login.html')
     
 @app.route('/page_register', methods=[])
 def page_register():
     if request.method == 'POST':
         data = request.get_json()
        # 補齊空缺程式碼
-        if ...
+        username = (data.get('username')).strip()
+        password = (data.get('password')).strip()
+        email = (data.get('email')).strip()
+        if not username or not password or not email:
             return jsonify({"status": "error", "message": "此名稱已被使用"})
 
         if len(password) < 8:
-       ...
-       
+            return jsonify({"status": "error", "message":"密碼字數不足8"})
+        if not re.search(r"[A-Z]", password) or not re.search(r"[a-z]", password):
+            return jsonify({"status": "error", "message":"密碼需包含英文字母大小寫"})
+        
+        if not re.compile(r"^[A-Za-z0-9._%+-]+@gmail\.com$").fullmatch(email):
+            return jsonify({"status": "error", "message":"Email 格式不符重新輸入"})
+        
+        
     return render_template('page_register.html')
 
 
@@ -75,6 +79,6 @@ def page_login():
 
 # 補齊空缺程式碼
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 
 
