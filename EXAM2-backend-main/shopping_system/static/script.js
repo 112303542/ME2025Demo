@@ -17,7 +17,7 @@ const products = [
 // === 顯示登入使用者於導行列，補齊程式碼 ===
   const username = localStorage.getItem("username");
   const userDisplay = document.getElementById("username-display");
-  
+  userDisplay.textContent = username;
 })();
 
 
