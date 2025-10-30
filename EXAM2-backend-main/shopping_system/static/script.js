@@ -15,9 +15,23 @@ const products = [
 
 (function showUsername() {
 // === 顯示登入使用者於導行列，補齊程式碼 ===
+ if(typeof handleLogin === "function"){
+    const form = document.getElementById("login-form");
+    if(form){
+      form.addEventListener("submit", handleLogin);
+    }
+  }
   const username = localStorage.getItem("username");
   const userDisplay = document.getElementById("username-display");
+  const logoutLink = document.getElementById("logout-link");
   if(userDisplay) userDisplay.textContent = username;
+  if(logoutLink){
+    logoutLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      localStorage.removeItem("username");
+      location.href = "page_login_.html";
+    });
+  }
 })();
 
 

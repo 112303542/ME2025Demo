@@ -18,9 +18,9 @@ def get_db_connection():
     cursor = conn.cursor()
 
 # 補齊空缺程式碼
-@app.route()
+@app.route('/page_login')
 def page_login():
-        return 
+        return render_template('page_login.html')
     
 @app.route('/page_register', methods=[])
 def page_register():
