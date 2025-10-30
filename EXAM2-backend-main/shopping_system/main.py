@@ -6,8 +6,7 @@ import re
 import os
 
 
-app = Flask(__name__, template_folder='templates', static_folder='static')
-app.secret_key = "exam2-secret"
+app = Flask(__name__)
 
 
 # 路徑修改
