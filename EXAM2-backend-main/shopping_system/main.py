@@ -6,7 +6,9 @@ import re
 import os
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates', static_folder='static')
+app.secret_key = "exam2-secret"
+
 
 # 路徑修改
 def get_db_connection():
@@ -134,5 +136,4 @@ def place_order():
 # 補齊空缺程式碼
 if __name__ == '__main__':
     app.run(debug=True)
-
-
+    
